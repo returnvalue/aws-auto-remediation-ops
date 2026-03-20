@@ -1,0 +1,10 @@
+services:
+  localstack:
+    image: localstack/localstack-pro  # Make sure you are using the pro image or standard image depending on your setup
+    ports:
+      - "4566:4566"
+    environment:
+      - ACTIVATE_PRO=1
+      - LOCALSTACK_AUTH_TOKEN=${YOUR_TOKEN}  # Use the token from your .env file
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
