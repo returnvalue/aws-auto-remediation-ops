@@ -30,8 +30,7 @@ The system follows an event-driven "Detection-Response" loop:
     ```bash
     terraform init
     terraform apply -auto-approve
-    
-```
+    ```
 
 ## Verification & Testing
 
@@ -41,24 +40,21 @@ To simulate a security misconfiguration and verify the auto-remediation:
     ```bash
     awslocal s3api put-bucket-acl --bucket auto-remediation-target-bucket --acl public-read
     aws s3api put-bucket-acl --bucket auto-remediation-target-bucket --acl public-read
-    
-```
+    ```
 
 2.  **Trigger Remediation (Simulate EventBridge):**
     *In a live AWS environment, this happens automatically. In LocalStack, you can trigger the function manually:*
     ```bash
     awslocal lambda invoke --function-name s3-remediation-function response.json
     aws lambda invoke --function-name s3-remediation-function response.json
-    
-```
+    ```
 
 3.  **Confirm the Fix:**
     Verify the bucket's ACL is now back to `private`:
     ```bash
     awslocal s3api get-bucket-acl --bucket auto-remediation-target-bucket
     aws s3api get-bucket-acl --bucket auto-remediation-target-bucket
-    
-```
+    ```
 
 ## Cleanup
 
